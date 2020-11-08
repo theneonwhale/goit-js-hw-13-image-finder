@@ -5,8 +5,8 @@
   justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
-  height: 200px;
-  width: calc((100% - (10px * 4)) / 4);
+  height: 300px;
+  width: calc((100% - (10px * 3)) / 3);
   margin: 5px;
   background-size: cover;
   object-fit: cover;
@@ -51,7 +51,7 @@ img:hover {
 }
 
 .photo-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .photo-card:hover .stats {
