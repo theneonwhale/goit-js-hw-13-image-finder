@@ -1,0 +1,23 @@
+ul {
+  padding: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.title {
+  text-align: center;
+}
+.search-form {
+  padding: 0;
+  margin-bottom: 20px;
+}
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+}
