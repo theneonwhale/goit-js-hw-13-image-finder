@@ -1,18 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@500&display=swap');
+
+body {
+  background-color: #ffffff;
+  font-family: 'Yantramanav', sans-serif;
+}
+
 ul {
   padding: 0;
 }
+
 img {
   display: block;
   max-width: 100%;
-  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  background-color: #ffffff;
 }
 .title {
+  margin-top: 20px;
   text-align: center;
+  font-family: 'Yantramanav', sans-serif;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: #b596e5;
+  text-shadow: #fff 0px 0px 5px, #fff 0px 0px 10px, #fff 0px 0px 15px,
+    #51e5ff 0px 0px 20px, #51e5ff 0px 0px 30px, #51e5ff 0px 0px 40px,
+    #51e5ff 0px 0px 50px, #51e5ff 0px 0px 75px;
 }
 .search-form {
+  display: flex;
+  justify-content: center;
   padding: 0;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
+
 .gallery {
   display: flex;
   flex-direction: row;
@@ -20,4 +42,18 @@ img {
   justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
+  margin: -5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.input-form {
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #b596e5;
+  color: #a37fda;
+  width: 200px;
+  box-shadow: #fff 0px 0px 5px, #fff 0px 0px 10px, #fff 0px 0px 15px,
+    #fff 0px 0px 20px, #51e5ff 0px 0px 30px, #fff 0px 0px 40px,
+    #51e5ff 0px 0px 50px, #51e5ff 0px 0px 75px;
 }

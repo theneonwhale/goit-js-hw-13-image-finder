@@ -3,12 +3,13 @@ import getRefs from './get-refs';
 import imageTpl from '../templates/image-card.hbs';
 import LoadMoreBtn from './load-more-btn';
 import debounce from 'lodash.debounce';
+
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import { notice, error } from '@pnotify/core';
+import { success, notice, error } from '@pnotify/core';
 
-import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import * as basicLightbox from 'basiclightbox';
 
 const refs = getRefs();
 const imagesApiService = new ImagesApiService();
@@ -16,9 +17,11 @@ const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
 });
+let pageCount = 0;
 
 refs.form.addEventListener('input', debounce(onSearch, 500));
 loadMoreBtn.refs.button.addEventListener('click', getImages);
+refs.imagesContainer.addEventListener('click', onOpenLightbox);
 
 function onSearch(e) {
   clearImagesContainer();
@@ -27,31 +30,45 @@ function onSearch(e) {
 
   if (imagesApiService.query === '') {
     loadMoreBtn.hide();
+
     onFetchError();
+
     return;
   }
   loadMoreBtn.show();
+
   imagesApiService.resetPage();
 
   loadMoreBtn.disable();
+
   getImages();
 }
 
 function getImages() {
   loadMoreBtn.disable();
 
-  imagesApiService.fetchImages().then(images => {
-    if (images.length === 0) {
+  imagesApiService.fetchImages().then(({ total, hits }) => {
+    if (hits.length === 0) {
       loadMoreBtn.hide();
 
       onFetchNoMatches();
-    } else if (images.length < 12) {
+
+      return;
+    } else if (hits.length < 12) {
       loadMoreBtn.hide();
     }
 
-    console.log(images.length);
-    scrollWin();
-    appendImagesMarkup(images);
+    if (pageCount > 0) {
+      scrollWin();
+    }
+
+    if (pageCount === 0) {
+      onFetchMatches(total);
+    }
+    pageCount += 1;
+
+    appendImagesMarkup(hits);
+
     loadMoreBtn.enable();
   });
 }
@@ -62,8 +79,10 @@ function appendImagesMarkup(image) {
 
 function clearImagesContainer() {
   refs.imagesContainer.innerHTML = '';
+  pageCount = 0;
 }
 
+// Window scroll
 function scrollWin() {
   setTimeout(() => {
     window.scrollBy({
@@ -73,33 +92,30 @@ function scrollWin() {
   }, 1000);
 }
 
-//
-refs.imagesContainer.addEventListener('click', onOpenLightbox);
-
+// Lightbox
 function onOpenLightbox(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-  console.dir(e.target);
+
   const instance = basicLightbox.create(`
-    <img src="${e.target.dataset.source}" width="800" height="600">
+    <img src="${e.target.dataset.source}">
 `);
 
   instance.show();
 }
 
-//
-
-function onFetchManyMatches() {
-  notice({
-    title: 'Too many matches!',
-    text: 'Too many matches found. Please enter a more specific query.',
+// Pnotify
+function onFetchMatches(total) {
+  success({
+    title: `Success!`,
+    text: `Found ${total} images!`,
     delay: 2500,
   });
 }
 
 function onFetchNoMatches() {
-  error({
+  notice({
     title: 'No matches!',
     text: 'No matches found. Please enter another query.',
     delay: 2500,
