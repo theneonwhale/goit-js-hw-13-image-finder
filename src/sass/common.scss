@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@500&display=swap');
-
 body {
   background-color: #ffffff;
-  font-family: 'Yantramanav', sans-serif;
 }
 
 ul {
@@ -16,17 +13,18 @@ img {
   object-fit: cover;
   background-color: #ffffff;
 }
+
 .title {
   margin-top: 20px;
   text-align: center;
-  font-family: 'Yantramanav', sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   text-transform: uppercase;
   color: #b596e5;
   text-shadow: #fff 0px 0px 5px, #fff 0px 0px 10px, #fff 0px 0px 15px,
     #51e5ff 0px 0px 20px, #51e5ff 0px 0px 30px, #51e5ff 0px 0px 40px,
     #51e5ff 0px 0px 50px, #51e5ff 0px 0px 75px;
 }
+
 .search-form {
   display: flex;
   justify-content: center;
