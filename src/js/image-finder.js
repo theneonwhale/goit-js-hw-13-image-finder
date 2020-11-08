@@ -8,8 +8,8 @@ import '@pnotify/core/dist/BrightTheme.css';
 import { notice, error } from '@pnotify/core';
 
 import * as basicLightbox from 'basiclightbox';
-// import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
+
 const refs = getRefs();
 const imagesApiService = new ImagesApiService();
 const loadMoreBtn = new LoadMoreBtn({
